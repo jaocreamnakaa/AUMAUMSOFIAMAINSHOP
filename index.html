@@ -148,6 +148,33 @@
 </head>
 <body class="pb-24 md:pb-12 selection:bg-pastelPink selection:text-gray-800">
 
+  <!-- Initial Storefront Splash / Loading Overlay -->
+  <div id="siteLoadingSplash" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center p-6 transition-opacity duration-500" style="background: linear-gradient(135deg, #FFF7FC 0%, #F4F8FF 50%, #FFF7FC 100%);">
+    <!-- Soft Decorative Pastel Blobs -->
+    <div class="absolute top-1/4 left-1/4 w-48 h-48 rounded-full bg-pastelPink/40 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-pastelBlue/45 blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col items-center text-center max-w-sm w-full space-y-6">
+      <!-- Shop Logo -->
+      <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1.5 bg-brand-gradient shadow-cute animate-float">
+        <img id="splashShopLogo" src="" alt="AUMAUMSOFIASHOP Logo" class="w-full h-full object-cover rounded-full bg-white border-2 border-white" />
+      </div>
+
+      <!-- Progress Bar (No % Numbers) -> Transforms into Welcome Text at 100% -->
+      <div id="splashProgressArea" class="w-full min-h-[48px] flex items-center justify-center px-3">
+        <!-- Progress Track -->
+        <div id="splashProgressTrack" class="w-60 sm:w-64 h-3.5 rounded-full bg-white/95 p-0.5 border border-pink-100 shadow-soft overflow-hidden transition-all duration-300">
+          <div id="splashProgressFill" class="h-full w-0 rounded-full bg-brand-gradient transition-all duration-150 ease-out"></div>
+        </div>
+
+        <!-- Welcome Message Shown at 100% -->
+        <p id="splashWelcomeMessage" class="hidden font-cute font-bold text-lg sm:text-xl text-brand-gradient tracking-wide transition-all duration-300">
+          ยินดีต้อนรับสู่ AUMAUMSOPIA
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="fixed top-4 right-4 z-[9999] flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
 
@@ -155,7 +182,7 @@
   <nav class="sticky top-0 z-40 glass-card border-b border-pink-100/80 shadow-soft">
     <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
       <!-- Brand Logo & Name -->
-      <button onclick="navigateToTab('home')" class="flex items-center gap-2.5 text-left group focus:outline-none">
+      <button type="button" onclick="navigateToTab('home')" class="flex items-center gap-2.5 text-left group focus:outline-none">
         <div class="w-10 h-10 rounded-full p-0.5 bg-brand-gradient shadow-sm shrink-0 overflow-hidden">
           <img id="navShopLogo" src="" alt="Logo" class="w-full h-full object-cover rounded-full bg-white" />
         </div>
@@ -174,13 +201,13 @@
       <div class="flex items-center gap-2">
         <!-- Music Speaker Pill -->
         <div class="flex items-center bg-white/95 border border-pink-100 rounded-full p-1 shadow-sm">
-          <button id="musicToggleBtn" onclick="toggleMusicPlay()" title="เปิด/ปิดเสียงเพลงพื้นหลัง" class="w-8 h-8 rounded-full bg-brand-gradient text-gray-700 flex items-center justify-center shadow-xs hover:scale-105 active:scale-95 transition">
+          <button type="button" id="musicToggleBtn" onclick="toggleMusicPlay()" title="เปิด/ปิดเสียงเพลงพื้นหลัง" class="w-8 h-8 rounded-full bg-brand-gradient text-gray-700 flex items-center justify-center shadow-xs hover:scale-105 active:scale-95 transition">
             <i id="musicSpeakerIcon" class="fa-solid fa-volume-high text-xs"></i>
           </button>
         </div>
 
         <!-- Admin Crown Button -->
-        <button id="adminCrownBtn" onclick="openAdminAccess()" title="ระบบหลังร้านแอดมิน" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-100 via-pink-100 to-blue-100 border border-white shadow-cute flex items-center justify-center text-amber-500 hover:scale-105 active:scale-95 transition relative">
+        <button type="button" id="adminCrownBtn" onclick="openAdminAccess()" title="ระบบหลังร้านแอดมิน" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-100 via-pink-100 to-blue-100 border border-white shadow-cute flex items-center justify-center text-amber-500 hover:scale-105 active:scale-95 transition relative">
           <i class="fa-solid fa-crown text-base"></i>
           <span id="adminActiveDot" class="hidden absolute top-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-white rounded-full"></span>
         </button>
@@ -208,7 +235,7 @@
 
         <div class="relative z-10 flex items-center justify-between gap-2 sm:gap-4">
           <!-- Left Arrow Button ‹ -->
-          <button onclick="switchHeaderTab(-1)" aria-label="แท็บก่อนหน้า" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/90 hover:bg-white text-pink-400 font-bold text-xl sm:text-2xl shadow-sm flex items-center justify-center shrink-0 active:scale-90 transition cursor-pointer border border-pink-100/70">
+          <button type="button" onclick="switchHeaderTab(-1)" aria-label="แท็บก่อนหน้า" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/90 hover:bg-white text-pink-400 font-bold text-xl sm:text-2xl shadow-sm flex items-center justify-center shrink-0 active:scale-90 transition cursor-pointer border border-pink-100/70">
             ‹
           </button>
 
@@ -226,7 +253,7 @@
           </div>
 
           <!-- Right Arrow Button › -->
-          <button onclick="switchHeaderTab(1)" aria-label="แท็บถัดไป" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/90 hover:bg-white text-blue-400 font-bold text-xl sm:text-2xl shadow-sm flex items-center justify-center shrink-0 active:scale-90 transition cursor-pointer border border-blue-100/70">
+          <button type="button" onclick="switchHeaderTab(1)" aria-label="แท็บถัดไป" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/90 hover:bg-white text-blue-400 font-bold text-xl sm:text-2xl shadow-sm flex items-center justify-center shrink-0 active:scale-90 transition cursor-pointer border border-blue-100/70">
             ›
           </button>
         </div>
@@ -279,7 +306,7 @@
             </h2>
             <p id="homeReviewsSubtitle" class="text-xs text-gray-500 mt-0.5">ขอบคุณทุกความไว้วางใจที่แวะมาอุดหนุนนะคะ 💕</p>
           </div>
-          <button onclick="openReviewModal()" class="px-4 py-2.5 rounded-full bg-brand-gradient text-gray-700 font-semibold text-xs sm:text-sm shadow-sm hover:opacity-95 active:scale-95 transition flex items-center justify-center gap-2 self-start sm:self-auto">
+          <button type="button" onclick="openReviewModal()" class="px-4 py-2.5 rounded-full bg-brand-gradient text-gray-700 font-semibold text-xs sm:text-sm shadow-sm hover:opacity-95 active:scale-95 transition flex items-center justify-center gap-2 self-start sm:self-auto">
             <i class="fa-solid fa-pen-to-square"></i> เขียนรีวิวให้ร้าน
           </button>
         </div>
@@ -351,7 +378,7 @@
                 <h2 id="selectedTopupGameName" class="font-cute font-bold text-xl text-gray-700">ชื่อเกม</h2>
               </div>
             </div>
-            <button onclick="backToTopupGames()" class="px-4 py-2 rounded-full bg-white border border-pink-100 text-pink-500 text-xs sm:text-sm font-semibold hover:bg-pink-50/60 transition flex items-center gap-1.5 shadow-sm">
+            <button type="button" onclick="backToTopupGames()" class="px-4 py-2 rounded-full bg-white border border-pink-100 text-pink-500 text-xs sm:text-sm font-semibold hover:bg-pink-50/60 transition flex items-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-arrow-left"></i> กลับไปเลือกเกมอื่น
             </button>
           </div>
@@ -395,17 +422,17 @@
             <p class="text-xs text-gray-500">เชื่อมต่อฐานข้อมูล Supabase เรียลไทม์ บันทึกปลอดภัย ✨</p>
           </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="refreshAllFromSupabase()" class="px-4 py-2 rounded-full bg-white text-blue-500 text-xs font-semibold shadow-sm hover:bg-blue-50 transition">
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="refreshAllFromSupabase()" class="px-4 py-2 rounded-full bg-white text-blue-500 text-xs font-semibold shadow-sm hover:bg-blue-50 transition">
             <i class="fa-solid fa-rotate mr-1"></i> โหลดข้อมูลล่าสุด
           </button>
-          <button onclick="openResetDefaultModal()" class="px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-xs font-semibold shadow-sm hover:bg-amber-100 transition">
+          <button type="button" onclick="openResetDefaultModal()" class="px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-xs font-semibold shadow-sm hover:bg-amber-100 transition">
             <i class="fa-solid fa-clock-rotate-left mr-1"></i> ย้อนกลับ / กลับไปใช้ข้อมูลเริ่มต้น
           </button>
-          <button onclick="navigateToTab('home')" class="px-4 py-2 rounded-full bg-white text-gray-600 text-xs font-semibold shadow-sm hover:bg-gray-50 transition">
+          <button type="button" onclick="navigateToTab('home')" class="px-4 py-2 rounded-full bg-white text-gray-600 text-xs font-semibold shadow-sm hover:bg-gray-50 transition">
             <i class="fa-solid fa-store mr-1 text-pink-400"></i> ดูหน้าร้าน
           </button>
-          <button onclick="logoutAdmin()" class="px-4 py-2 rounded-full bg-rose-400 text-white text-xs font-semibold shadow-sm hover:bg-rose-500 transition">
+          <button type="button" onclick="logoutAdmin()" class="px-4 py-2 rounded-full bg-rose-400 text-white text-xs font-semibold shadow-sm hover:bg-rose-500 transition">
             <i class="fa-solid fa-right-from-bracket mr-1"></i> ออกจากระบบ
           </button>
         </div>
@@ -413,25 +440,25 @@
 
       <!-- Admin Sub-Navigation Tabs -->
       <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-        <button onclick="switchAdminPanel('general')" id="admTab-general" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-brand-gradient text-gray-700 shadow-sm">
+        <button type="button" onclick="switchAdminPanel('general')" id="admTab-general" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-brand-gradient text-gray-700 shadow-sm">
           <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>ข้อมูลร้าน & ส่วนหัว
         </button>
-        <button onclick="switchAdminPanel('homeContent')" id="admTab-homeContent" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('homeContent')" id="admTab-homeContent" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-house-heart mr-1.5"></i>หน้าหลัก (ปก/ไฮไลท์/กฎ/รีวิว)
         </button>
-        <button onclick="switchAdminPanel('rentManage')" id="admTab-rentManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('rentManage')" id="admTab-rentManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-key mr-1.5"></i>จัดการปล่อยเช่า & ประเภท
         </button>
-        <button onclick="switchAdminPanel('sellManage')" id="admTab-sellManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('sellManage')" id="admTab-sellManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-tags mr-1.5"></i>จัดการขายรหัส
         </button>
-        <button onclick="switchAdminPanel('topupManage')" id="admTab-topupManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('topupManage')" id="admTab-topupManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-gem mr-1.5"></i>จัดการเติมเกม
         </button>
-        <button onclick="switchAdminPanel('contactManage')" id="admTab-contactManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('contactManage')" id="admTab-contactManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-address-book mr-1.5"></i>ช่องทางติดต่อ
         </button>
-        <button onclick="switchAdminPanel('musicManage')" id="admTab-musicManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
+        <button type="button" onclick="switchAdminPanel('musicManage')" id="admTab-musicManage" class="adm-subtab px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap bg-white text-gray-600 border border-pink-100/70">
           <i class="fa-solid fa-music mr-1.5"></i>จัดการเพลงพื้นหลัง
         </button>
       </div>
@@ -455,7 +482,7 @@
                 <label class="block text-xs font-semibold text-gray-600 mb-1">ลิงก์สำรองหลักของร้าน (ใช้กรณีไม่ได้ตั้งช่องทางเปิดบิลเฉพาะ)</label>
                 <input id="admBillingUrlInput" type="url" placeholder="https://line.me/..." class="w-full px-4 py-2.5 rounded-xl border border-pink-100 focus:outline-none focus:border-pink-300 text-sm bg-white" />
               </div>
-              <button id="btnSaveGeneralSettings" onclick="saveGeneralSettings()" class="px-5 py-2.5 rounded-full bg-brand-gradient text-gray-700 font-semibold text-sm shadow-sm hover:opacity-95 disabled:opacity-50">
+              <button type="button" id="btnSaveGeneralSettings" onclick="saveGeneralSettings()" class="px-5 py-2.5 rounded-full bg-brand-gradient text-gray-700 font-semibold text-sm shadow-sm hover:opacity-95 disabled:opacity-50">
                 <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกข้อมูลร้าน
               </button>
             </div>
@@ -470,6 +497,76 @@
             </div>
           </div>
 
+          <!-- Welcome Loading Splash Screen Editor -->
+          <div class="pt-4 border-t border-pink-100/70 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h4 class="font-cute font-bold text-base text-gray-700"><i class="fa-solid fa-spinner text-pink-400 mr-1.5"></i>ตั้งค่าหน้าโหลดต้อนรับ (Splash Loading Screen)</h4>
+                <p class="text-xs text-gray-500">ปรับแต่งโลโก้หน้าโหลด ข้อความต้อนรับเมื่อโหลดเต็ม 100% สีพื้นหลัง และทดสอบดูตัวอย่างได้ทันที</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="previewSplashScreenNow()" class="px-3.5 py-2 rounded-full bg-white border border-blue-200 text-blue-500 text-xs font-semibold shadow-sm hover:bg-blue-50">
+                  <i class="fa-solid fa-eye mr-1"></i> ทดสอบดูหน้าโหลด
+                </button>
+                <button id="btnResetSplashSettings" type="button" onclick="resetSplashSettingsToDefault()" class="px-3.5 py-2 rounded-full bg-white border border-amber-200 text-amber-600 text-xs font-semibold shadow-sm hover:bg-amber-50 disabled:opacity-50">
+                  <i class="fa-solid fa-rotate-left mr-1"></i> คืนค่าหน้าโหลดเริ่มต้น
+                </button>
+                <button id="btnSaveSplashSettings" type="button" onclick="saveSplashSettings()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm hover:opacity-95 disabled:opacity-50">
+                  <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกหน้าโหลด
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-pink-50/30 p-4 rounded-2xl border border-pink-100/70">
+              <!-- Splash Logo Column -->
+              <div class="bg-white/90 rounded-2xl p-3.5 border border-pink-100 flex flex-col items-center justify-center text-center gap-2">
+                <img id="admSplashLogoPreview" src="" alt="Splash Logo" class="w-20 h-20 rounded-full object-cover border-2 border-pink-100 shadow-xs" />
+                <span class="text-[11px] font-semibold text-gray-600">โลโก้ที่แสดงในหน้าโหลด</span>
+                <div class="flex flex-wrap items-center justify-center gap-1.5">
+                  <label class="px-3 py-1.5 rounded-full bg-pink-50 border border-pink-100 text-pink-500 text-[11px] font-semibold cursor-pointer hover:bg-pink-100/60">
+                    <i class="fa-solid fa-camera mr-1"></i> เปลี่ยนโลโก้หน้าโหลด
+                    <input type="file" accept="image/*" class="hidden" onchange="triggerCropperFromFile(event, 1, 'splashLogo')" />
+                  </label>
+                  <button type="button" onclick="useMainLogoForSplash()" class="px-2.5 py-1.5 rounded-full bg-gray-100 text-gray-600 text-[11px] font-medium hover:bg-gray-200">
+                    ใช้โลโก้หลักร้าน
+                  </button>
+                </div>
+              </div>
+
+              <!-- Splash Text & Options Column -->
+              <div class="md:col-span-2 space-y-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-600 mb-1">ข้อความเมื่อโหลดเต็ม 100% (แสดงแทนหลอดโหลด)</label>
+                  <input id="admSplashWelcomeInput" type="text" placeholder="ยินดีต้อนรับสู่ AUMAUMSOPIA" class="w-full px-3.5 py-2 rounded-xl border border-pink-100 text-xs font-semibold bg-white" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">การแสดงผลหน้าโหลด</label>
+                    <select id="admSplashEnabledSelect" class="w-full px-3 py-2 rounded-xl border border-pink-100 text-xs bg-white">
+                      <option value="true">เปิดใช้งานหน้าโหลด</option>
+                      <option value="false">ปิดหน้าโหลด (เข้าเว็บทันที)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">สีพื้นหลังเริ่มต้น (ซ้าย)</label>
+                    <div class="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border border-pink-100">
+                      <input id="admSplashBgStartInput" type="color" value="#FFF7FC" class="w-7 h-6 rounded border-0 cursor-pointer bg-transparent" />
+                      <span id="admSplashBgStartHex" class="text-[11px] text-gray-500 font-mono">#FFF7FC</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">สีพื้นหลังปลายทาง (ขวา)</label>
+                    <div class="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border border-pink-100">
+                      <input id="admSplashBgEndInput" type="color" value="#F4F8FF" class="w-7 h-6 rounded border-0 cursor-pointer bg-transparent" />
+                      <span id="admSplashBgEndHex" class="text-[11px] text-gray-500 font-mono">#F4F8FF</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Storefront Section Headers & Footer Texts Editor -->
           <div class="pt-4 border-t border-pink-100/70 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -481,7 +578,7 @@
                 <button id="btnResetCustomTexts" type="button" onclick="resetCustomTextsToDefault()" class="px-3.5 py-2 rounded-full bg-white border border-amber-200 text-amber-600 text-xs font-semibold shadow-sm hover:bg-amber-50 disabled:opacity-50">
                   <i class="fa-solid fa-rotate-left mr-1"></i> คืนค่าข้อความเริ่มต้น
                 </button>
-                <button id="btnSaveCustomTexts" onclick="saveCustomTextsSettings()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm hover:opacity-95 disabled:opacity-50">
+                <button type="button" id="btnSaveCustomTexts" onclick="saveCustomTextsSettings()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm hover:opacity-95 disabled:opacity-50">
                   <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกข้อความทั้งหมด
                 </button>
               </div>
@@ -554,7 +651,7 @@
                 <h4 class="font-cute font-bold text-base text-gray-700"><i class="fa-solid fa-receipt text-pink-400 mr-1.5"></i>จัดการช่องทางติดต่อสำหรับปุ่ม "เปิดบิล / ทักแชท"</h4>
                 <p class="text-xs text-gray-500">เพิ่ม/ลบ/แก้ไขไอคอนและลิงก์ช่องทางติดต่อบนปุ่มเปิดบิล เมื่อลูกค้ากดปุ่มจะแสดงไอคอนให้เลือกกดไปยังช่องทางนั้นทันที</p>
               </div>
-              <button onclick="openBillingChannelEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+              <button type="button" onclick="openBillingChannelEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
                 <i class="fa-solid fa-plus mr-1"></i> เพิ่มช่องทางบนปุ่มเปิดบิล
               </button>
             </div>
@@ -616,7 +713,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">จัดการไฮไลท์ร้าน (วงกลม + หลายรูปภาพ)</h3>
-            <button onclick="openHighlightEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openHighlightEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มไฮไลท์ใหม่
             </button>
           </div>
@@ -629,7 +726,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">จัดการบล็อกกฎและรายละเอียดร้าน</h3>
-            <button onclick="openRuleEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openRuleEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มบล็อกกฎใหม่
             </button>
           </div>
@@ -661,7 +758,7 @@
             </div>
             <div class="flex items-center gap-2">
               <input id="newRentCatName" type="text" placeholder="ชื่อประเภทใหม่ เช่น ROV, Free Fire..." class="px-3 py-2 rounded-xl border border-pink-100 text-xs bg-white focus:outline-none" />
-              <button id="btnAddRentCat" onclick="addRentCategory()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm whitespace-nowrap disabled:opacity-50">
+              <button type="button" id="btnAddRentCat" onclick="addRentCategory()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm whitespace-nowrap disabled:opacity-50">
                 <i class="fa-solid fa-plus mr-1"></i> เพิ่มประเภท
               </button>
             </div>
@@ -675,7 +772,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">รายการรหัสปล่อยเช่าทั้งหมด</h3>
-            <button onclick="openRentEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openRentEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มรหัสเช่าใหม่
             </button>
           </div>
@@ -690,7 +787,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">จัดการรายการขายรหัส</h3>
-            <button onclick="openSellEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openSellEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มรหัสขายใหม่
             </button>
           </div>
@@ -705,7 +802,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">จัดการเกมและเรทเติมเกม</h3>
-            <button onclick="openTopupGameEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openTopupGameEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มเกมใหม่
             </button>
           </div>
@@ -720,7 +817,7 @@
         <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-soft space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100/70 pb-3">
             <h3 class="font-cute font-bold text-lg text-gray-700">จัดการช่องทางติดต่อร้าน</h3>
-            <button onclick="openContactEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
+            <button type="button" onclick="openContactEditor(null)" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm">
               <i class="fa-solid fa-plus mr-1"></i> เพิ่มช่องทางติดต่อ
             </button>
           </div>
@@ -746,10 +843,10 @@
               <span id="admDefaultVolLabel" class="text-xs font-bold text-pink-500 w-9">45%</span>
             </div>
             <div class="flex items-center gap-2">
-              <button onclick="testPlayAdminAudio()" class="px-3.5 py-2 rounded-full bg-white border border-pink-100 text-pink-500 text-xs font-semibold hover:bg-pink-50/60">
+              <button type="button" onclick="testPlayAdminAudio()" class="px-3.5 py-2 rounded-full bg-white border border-pink-100 text-pink-500 text-xs font-semibold hover:bg-pink-50/60">
                 <i class="fa-solid fa-play mr-1"></i> ทดสอบเสียง
               </button>
-              <button id="btnSaveMusicVol" onclick="saveMusicDefaultSettings()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm disabled:opacity-50">
+              <button type="button" id="btnSaveMusicVol" onclick="saveMusicDefaultSettings()" class="px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-sm disabled:opacity-50">
                 <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกระดับเสียง
               </button>
             </div>
@@ -761,7 +858,7 @@
               <h4 class="text-xs font-bold text-blue-500"><i class="fa-solid fa-link mr-1"></i>เพิ่มเพลงจากลิงก์ URL (MP3/WAV/OGG/Stream)</h4>
               <input id="newTrackTitleUrl" type="text" placeholder="ชื่อเพลง..." class="w-full px-3 py-2 rounded-xl border border-pink-100 text-xs" />
               <input id="newTrackUrlInput" type="url" placeholder="วางลิงก์ไฟล์เสียง https://..." class="w-full px-3 py-2 rounded-xl border border-pink-100 text-xs" />
-              <button id="btnAddTrackUrl" onclick="addTrackFromUrl()" class="px-4 py-2 rounded-full bg-blue-400 text-white text-xs font-semibold hover:bg-blue-500 disabled:opacity-50">
+              <button type="button" id="btnAddTrackUrl" onclick="addTrackFromUrl()" class="px-4 py-2 rounded-full bg-blue-400 text-white text-xs font-semibold hover:bg-blue-500 disabled:opacity-50">
                 <i class="fa-solid fa-plus mr-1"></i> ตรวจสอบและเพิ่มลิงก์เพลง
               </button>
             </div>
@@ -834,7 +931,7 @@
     <div class="bg-white rounded-3xl p-4 sm:p-6 w-full max-w-2xl shadow-2xl border border-pink-100 flex flex-col max-h-[92vh]">
       <div class="flex items-center justify-between border-b border-pink-100 pb-3 mb-3">
         <h3 class="font-cute font-bold text-base sm:text-lg text-gray-700"><i class="fa-solid fa-crop-simple text-pink-400 mr-1.5"></i>ครอบตัดและตรวจสอบตัวอย่างรูปภาพ</h3>
-        <button onclick="closeCropperModal()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeCropperModal()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-auto flex-1">
@@ -871,19 +968,19 @@
     <div class="bg-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-pink-100 space-y-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2.5">
-          <img id="hlViewerThumb" src="" class="w-9 h-9 rounded-full object-cover border border-pink-100" />
+          <img id="hlViewerThumb" src="" alt="Highlight" class="w-9 h-9 rounded-full object-cover border border-pink-100" />
           <div>
             <h4 id="hlViewerTitle" class="font-cute font-bold text-sm text-gray-700">ชื่อไฮไลท์</h4>
             <p id="hlViewerCounter" class="text-[11px] text-pink-400">1 / 1</p>
           </div>
         </div>
-        <button onclick="closeModal('highlightViewerModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('highlightViewerModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="relative rounded-2xl overflow-hidden bg-gray-50 border border-pink-100 flex items-center justify-center min-h-[260px]">
-        <img id="hlViewerCurrentImg" src="" class="w-full object-contain transition-all" />
-        <button onclick="stepHighlightSlide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">‹</button>
-        <button onclick="stepHighlightSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">›</button>
+        <img id="hlViewerCurrentImg" src="" alt="Highlight slide" class="w-full object-contain transition-all" />
+        <button type="button" onclick="stepHighlightSlide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">‹</button>
+        <button type="button" onclick="stepHighlightSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">›</button>
       </div>
 
       <p id="hlViewerDesc" class="text-xs text-gray-600 bg-pink-50/40 p-3 rounded-xl"></p>
@@ -895,7 +992,7 @@
     <div class="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-md shadow-2xl border border-pink-100 space-y-4">
       <div class="flex items-center justify-between border-b border-pink-100 pb-3">
         <h3 class="font-cute font-bold text-lg text-gray-700">เขียนรีวิวให้ร้าน AUMAUMSOFIASHOP 💕</h3>
-        <button onclick="closeModal('writeReviewModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('writeReviewModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <form onsubmit="submitCustomerReview(event)" class="space-y-3.5">
@@ -930,7 +1027,7 @@
             <button type="button" id="clearReviewImgBtn" onclick="clearPendingReviewImg()" class="hidden text-xs text-rose-400 underline">ลบรูปที่เลือก</button>
           </div>
           <div id="reviewImgPreviewBox" class="hidden mt-2 w-24 h-24 rounded-xl overflow-hidden border border-pink-100">
-            <img id="reviewImgPreview" src="" class="w-full h-full object-cover" />
+            <img id="reviewImgPreview" src="" alt="Review preview" class="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -949,12 +1046,12 @@
           <h4 id="sellGalleryTitle" class="font-cute font-bold text-base text-gray-700">รายละเอียดรูปภาพรหัส</h4>
           <p id="sellGalleryCounter" class="text-xs text-pink-400">รูปที่ 1 / 1</p>
         </div>
-        <button onclick="closeModal('sellGalleryModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('sellGalleryModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="relative rounded-2xl overflow-hidden bg-gray-50 border border-pink-100 flex items-center justify-center min-h-[260px] max-h-[60vh]">
-        <img id="sellGalleryMainImg" src="" class="max-w-full max-h-[58vh] object-contain" />
-        <button onclick="stepSellGallery(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">‹</button>
-        <button onclick="stepSellGallery(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">›</button>
+        <img id="sellGalleryMainImg" src="" alt="Gallery main" class="max-w-full max-h-[58vh] object-contain" />
+        <button type="button" onclick="stepSellGallery(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">‹</button>
+        <button type="button" onclick="stepSellGallery(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 text-gray-700 shadow flex items-center justify-center font-bold">›</button>
       </div>
       <div id="sellGalleryThumbs" class="flex items-center gap-2 overflow-x-auto pb-1">
         <!-- Thumbs injected by JS -->
@@ -963,11 +1060,11 @@
   </div>
 
   <!-- Modal 6: Dynamic Admin Form Editor Modal -->
-  <div id="adminDynamicModal" class="hidden fixed inset-0 z-50 bg-black/45 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+  <div id="adminDynamicModal" onclick="if(event.target===this)closeModal('adminDynamicModal')" class="hidden fixed inset-0 z-50 bg-black/45 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-xl shadow-2xl border border-pink-100 flex flex-col max-h-[90vh]">
       <div class="flex items-center justify-between border-b border-pink-100 pb-3 mb-4">
         <h3 id="admDynamicModalTitle" class="font-cute font-bold text-lg text-gray-700">แก้ไขข้อมูล</h3>
-        <button onclick="closeModal('adminDynamicModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('adminDynamicModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="admDynamicModalBody" class="overflow-y-auto flex-1 space-y-4 pr-1">
         <!-- Injected dynamically based on entity being edited -->
@@ -983,7 +1080,7 @@
           <h3 class="font-cute font-bold text-base sm:text-lg text-gray-700"><i class="fa-solid fa-comments text-pink-400 mr-1.5"></i>เลือกช่องทางเปิดบิลกับร้าน</h3>
           <p id="billingPickerSubtitle" class="text-[11px] text-gray-500 mt-0.5">กดที่ไอคอนช่องทางที่สะดวกเพื่อไปยังแชทร้านทันทีค่ะ ✨</p>
         </div>
-        <button onclick="closeModal('billingChannelPickerModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('billingChannelPickerModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div id="billingChannelPickerGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-1">
@@ -1007,7 +1104,7 @@
             <p class="text-[11px] text-gray-500">เลือกรูปแบบการคืนค่าข้อมูลที่ต้องการ</p>
           </div>
         </div>
-        <button onclick="closeModal('resetDefaultConfirmModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeModal('resetDefaultConfirmModal')" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="space-y-2.5 text-left">
@@ -1017,7 +1114,7 @@
           </span>
           <div>
             <p class="font-cute font-bold text-xs sm:text-sm text-gray-700">คืนค่าเฉพาะการตั้งค่าและข้อความเริ่มต้น</p>
-            <p class="text-[11px] text-gray-500 mt-0.5">รีเซ็ตชื่อร้าน โลโก้ ปกร้าน ข้อความหัว/ท้ายเว็บ แท็บเมนู และระดับเสียงกลับเป็นค่าเริ่มต้น (ข้อมูลรหัสเช่า/ขาย/เติมเกม/รีวิวยังอยู่ครบ)</p>
+            <p class="text-[11px] text-gray-500 mt-0.5">รีเซ็ตชื่อร้าน โลโก้ ปกร้าน หน้าโหลดต้อนรับ ข้อความหัว/ท้ายเว็บ แท็บเมนู และระดับเสียงกลับเป็นค่าเริ่มต้น (ข้อมูลรหัสเช่า/ขาย/เติมเกม/รีวิวยังอยู่ครบ)</p>
           </div>
         </button>
 
@@ -1082,6 +1179,14 @@
       { id: 'contact', label: 'ช่องทางติดต่อ', subtitle: 'ติดต่อสอบถาม แจ้งโอน หรือเปิดบิลผ่านช่องทางด้านล่างได้เลยค่ะ 💌', icon: 'fa-comments' }
     ];
 
+    const DEFAULT_SPLASH_SETTINGS = {
+      enabled: true,
+      logo: '',
+      welcomeText: 'ยินดีต้อนรับสู่ AUMAUMSOPIA',
+      bgStart: '#FFF7FC',
+      bgEnd: '#F4F8FF'
+    };
+
     const DEFAULT_CUSTOM_TEXTS = {
       shopTagline: '✨ CUTE GAME STORE',
       homeHighlightsTitle: 'ไฮไลท์ประจำร้าน',
@@ -1111,6 +1216,7 @@
       shopCover: FALLBACK_COVER,
       coverHeight: '240px',
       billingUrl: 'https://line.me',
+      splashSettings: { ...DEFAULT_SPLASH_SETTINGS },
       customTexts: { ...DEFAULT_CUSTOM_TEXTS },
       tabs: JSON.parse(JSON.stringify(DEFAULT_TABS)),
       billingChannels: [],
@@ -1135,6 +1241,116 @@
         ]
       }
     };
+
+    /* ==========================================================================
+       INITIAL WELCOME SPLASH SCREEN CONTROLLER (ADMIN CUSTOMIZABLE)
+       ========================================================================== */
+    let splashProgressVal = 0;
+    let splashDataLoaded = false;
+    let splashCompleted = false;
+    let splashIntervalId = null;
+
+    function applySplashSettingsToDOM() {
+      const sp = { ...DEFAULT_SPLASH_SETTINGS, ...(appState.splashSettings || {}) };
+      const splashEl = document.getElementById('siteLoadingSplash');
+      const logoEl = document.getElementById('splashShopLogo');
+      const welcomeEl = document.getElementById('splashWelcomeMessage');
+
+      if (splashEl) {
+        const c1 = /^#[0-9A-Fa-f]{6}$/.test(sp.bgStart) ? sp.bgStart : DEFAULT_SPLASH_SETTINGS.bgStart;
+        const c2 = /^#[0-9A-Fa-f]{6}$/.test(sp.bgEnd) ? sp.bgEnd : DEFAULT_SPLASH_SETTINGS.bgEnd;
+        splashEl.style.background = `linear-gradient(135deg, ${c1} 0%, ${c2} 50%, ${c1} 100%)`;
+      }
+      if (logoEl) {
+        logoEl.src = sp.logo || appState.shopLogo || FALLBACK_LOGO;
+      }
+      if (welcomeEl) {
+        welcomeEl.textContent = (sp.welcomeText || '').trim() || DEFAULT_SPLASH_SETTINGS.welcomeText;
+      }
+    }
+
+    function startInitialLoadingSplash(isPreview = false) {
+      const splashEl = document.getElementById('siteLoadingSplash');
+      const trackEl = document.getElementById('splashProgressTrack');
+      const fillEl = document.getElementById('splashProgressFill');
+      const welcomeEl = document.getElementById('splashWelcomeMessage');
+
+      if (!splashEl || !fillEl || !trackEl || !welcomeEl) return;
+
+      applySplashSettingsToDOM();
+
+      if (!isPreview && appState.splashSettings && appState.splashSettings.enabled === false) {
+        splashCompleted = true;
+        splashEl.classList.add('hidden');
+        return;
+      }
+
+      if (splashIntervalId) {
+        clearInterval(splashIntervalId);
+        splashIntervalId = null;
+      }
+
+      splashProgressVal = 0;
+      splashCompleted = false;
+      if (isPreview) {
+        splashDataLoaded = true;
+      }
+
+      fillEl.style.width = '0%';
+      trackEl.classList.remove('hidden');
+      welcomeEl.classList.add('hidden');
+      splashEl.style.opacity = '1';
+      splashEl.style.pointerEvents = 'auto';
+      splashEl.classList.remove('hidden');
+
+      splashIntervalId = setInterval(() => {
+        if (splashCompleted) return;
+
+        if (!splashDataLoaded) {
+          if (splashProgressVal < 90) {
+            splashProgressVal = Math.min(90, splashProgressVal + (90 - splashProgressVal) * 0.14 + 1.5);
+            fillEl.style.width = `${splashProgressVal}%`;
+          }
+        } else {
+          splashProgressVal = Math.min(100, splashProgressVal + 14);
+          fillEl.style.width = `${splashProgressVal}%`;
+
+          if (splashProgressVal >= 100) {
+            splashCompleted = true;
+            clearInterval(splashIntervalId);
+            splashIntervalId = null;
+            applySplashSettingsToDOM();
+            setTimeout(() => {
+              trackEl.classList.add('hidden');
+              welcomeEl.classList.remove('hidden');
+
+              setTimeout(() => {
+                splashEl.style.opacity = '0';
+                splashEl.style.pointerEvents = 'none';
+                setTimeout(() => {
+                  splashEl.classList.add('hidden');
+                }, 500);
+              }, 1150);
+            }, 180);
+          }
+        }
+      }, 45);
+    }
+
+    function markSplashDataReady() {
+      applySplashSettingsToDOM();
+      const splashEl = document.getElementById('siteLoadingSplash');
+      if (appState.splashSettings && appState.splashSettings.enabled === false && splashEl) {
+        if (splashIntervalId) {
+          clearInterval(splashIntervalId);
+          splashIntervalId = null;
+        }
+        splashCompleted = true;
+        splashEl.classList.add('hidden');
+        return;
+      }
+      splashDataLoaded = true;
+    }
 
     const busyLocks = new Set();
     function withSubmitLock(lockKey, btnEl, fn) {
@@ -1250,12 +1466,16 @@
           appState.music.activeTrackId = st.active_track_id || 'trk_1';
           if (Array.isArray(st.tabs) && st.tabs.length > 0) {
             const metaEntry = st.tabs.find(item => item && item.id === '__custom_texts__');
-            const navTabs = st.tabs.filter(item => item && item.id !== '__custom_texts__');
+            const splashEntry = st.tabs.find(item => item && item.id === '__splash_settings__');
+            const navTabs = st.tabs.filter(item => item && item.id !== '__custom_texts__' && item.id !== '__splash_settings__');
             if (navTabs.length > 0) {
               appState.tabs = navTabs;
             }
             if (metaEntry && metaEntry.texts && typeof metaEntry.texts === 'object') {
               appState.customTexts = { ...DEFAULT_CUSTOM_TEXTS, ...metaEntry.texts };
+            }
+            if (splashEntry && splashEntry.splash && typeof splashEntry.splash === 'object') {
+              appState.splashSettings = { ...DEFAULT_SPLASH_SETTINGS, ...splashEntry.splash };
             }
           }
         }
@@ -1460,7 +1680,7 @@
         const iconWrap = document.createElement('div');
         iconWrap.className = 'w-14 h-14 rounded-2xl p-0.5 bg-white shadow-xs overflow-hidden border border-pink-100 group-hover:scale-105 transition';
         const img = document.createElement('img');
-        img.src = ch.icon;
+        img.src = ch.icon || makeSvgPlaceholder(150, 150, '#F9D2ED', '#D4E4FF', 'CHAT', 'เปิดบิล');
         img.alt = ch.name;
         img.className = 'w-full h-full object-cover rounded-xl';
         iconWrap.appendChild(img);
@@ -1513,11 +1733,13 @@
     }
 
     function openModal(id) {
-      document.getElementById(id).classList.remove('hidden');
+      const m = document.getElementById(id);
+      if (m) m.classList.remove('hidden');
     }
 
     function closeModal(id) {
-      document.getElementById(id).classList.add('hidden');
+      const m = document.getElementById(id);
+      if (m) m.classList.add('hidden');
     }
 
     function escapeHtml(str) {
@@ -1620,6 +1842,7 @@
         const isActive = currentTabId === tab.id;
 
         const dBtn = document.createElement('button');
+        dBtn.type = 'button';
         dBtn.className = isActive
           ? 'px-3.5 py-1.5 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold shadow-xs transition flex items-center gap-1.5'
           : 'px-3.5 py-1.5 rounded-full text-gray-500 hover:bg-pink-50/70 text-xs font-medium transition flex items-center gap-1.5';
@@ -1633,6 +1856,7 @@
         desktopNav.appendChild(dBtn);
 
         const mBtn = document.createElement('button');
+        mBtn.type = 'button';
         mBtn.className = isActive
           ? 'px-3 py-1.5 rounded-full bg-brand-gradient text-gray-700 text-xs font-semibold whitespace-nowrap shadow-xs shrink-0 flex items-center gap-1.5'
           : 'px-3 py-1.5 rounded-full bg-white text-gray-500 border border-pink-100/70 text-xs font-medium whitespace-nowrap shrink-0 flex items-center gap-1.5';
@@ -1733,6 +1957,7 @@
       } else {
         appState.highlights.forEach(hl => {
           const item = document.createElement('button');
+          item.type = 'button';
           item.className = 'flex flex-col items-center gap-2 group shrink-0 w-20 sm:w-24 focus:outline-none';
           item.onclick = () => openHighlightViewer(hl.id);
 
@@ -1972,6 +2197,7 @@
       filterBar.innerHTML = '';
 
       const allBtn = document.createElement('button');
+      allBtn.type = 'button';
       allBtn.className = selectedRentCatId === 'all'
         ? 'px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-bold shadow-xs transition'
         : 'px-4 py-2 rounded-full bg-white border border-pink-100 text-gray-500 hover:bg-pink-50/50 text-xs font-medium transition';
@@ -1983,6 +2209,7 @@
         const count = appState.rentItems.filter(r => r.categoryId === cat.id).length;
         const isSelected = selectedRentCatId === cat.id;
         const btn = document.createElement('button');
+        btn.type = 'button';
         btn.className = isSelected
           ? 'px-4 py-2 rounded-full bg-brand-gradient text-gray-700 text-xs font-bold shadow-xs transition'
           : 'px-4 py-2 rounded-full bg-white border border-pink-100 text-gray-500 hover:bg-pink-50/50 text-xs font-medium transition';
@@ -2264,9 +2491,11 @@
       thumbs.innerHTML = '';
       currentSellGalleryImages.forEach((imgObj, idx) => {
         const t = document.createElement('button');
+        t.type = 'button';
         t.className = `w-14 h-14 rounded-xl overflow-hidden border-2 shrink-0 ${idx === currentSellGalleryIndex ? 'border-pink-300' : 'border-transparent opacity-60'}`;
         const im = document.createElement('img');
         im.src = imgObj.url;
+        im.alt = imgObj.label;
         im.className = 'w-full h-full object-cover';
         t.appendChild(im);
         t.onclick = () => { currentSellGalleryIndex = idx; updateSellGalleryUI(); };
@@ -2299,6 +2528,7 @@
 
       appState.topupGames.forEach(game => {
         const btn = document.createElement('button');
+        btn.type = 'button';
         btn.className = 'flex flex-col items-center gap-3 group focus:outline-none p-2 rounded-3xl hover:bg-pink-50/40 transition';
         btn.onclick = () => openTopupGameRates(game.id);
 
@@ -2770,6 +3000,9 @@
           });
         }, 80);
       };
+      reader.onerror = () => {
+        showToast('ไม่สามารถอ่านไฟล์รูปภาพได้ กรุณาลองเลือกไฟล์ใหม่อีกครั้งค่ะ', 'error');
+      };
       reader.readAsDataURL(file);
     }
 
@@ -2781,7 +3014,7 @@
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high'
       });
-      return canvas.toDataURL('image/jpeg', 0.78);
+      return canvas ? canvas.toDataURL('image/jpeg', 0.78) : '';
     }
 
     function refreshCropPreview() {
@@ -2810,10 +3043,27 @@
           const ok = await upsertShopSettings({ shop_logo: finalDataUrl });
           if (ok) {
             appState.shopLogo = finalDataUrl;
+            applySplashSettingsToDOM();
             renderNavigation();
             renderAdminDashboard();
             closeCropperModal();
             showToast('อัปเดตโลโก้ร้านเรียบร้อยแล้ว ✨');
+          }
+        });
+        return;
+      } else if (activeCropContext === 'splashLogo') {
+        withSubmitLock('saveSplashLogo', btn, async () => {
+          appState.splashSettings = {
+            ...DEFAULT_SPLASH_SETTINGS,
+            ...(appState.splashSettings || {}),
+            logo: finalDataUrl
+          };
+          const ok = await upsertShopSettings({});
+          if (ok) {
+            applySplashSettingsToDOM();
+            renderAdminDashboard();
+            closeCropperModal();
+            showToast('อัปเดตโลโก้หน้าโหลดเรียบร้อยแล้ว ✨');
           }
         });
         return;
@@ -2911,16 +3161,29 @@
         });
 
         if (signInErr || !authData || !authData.session) {
-          errEl.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง';
+          const msg = signInErr && signInErr.message ? signInErr.message : '';
+          if (msg.toLowerCase().includes('email not confirmed')) {
+            errEl.textContent = 'อีเมลนี้ยังไม่ได้ยืนยันใน Supabase Authentication > Users';
+          } else {
+            errEl.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง (' + (msg || 'Login failed') + ')';
+          }
           errEl.classList.remove('hidden');
           return;
         }
 
         const { data: isAdminRes, error: rpcErr } = await supabaseClient.rpc('is_admin');
-        if (rpcErr || isAdminRes !== true) {
+        if (rpcErr) {
           await supabaseClient.auth.signOut();
           setAdminAuthState(false);
-          errEl.textContent = 'บัญชีนี้ไม่มีสิทธิ์ผู้ดูแลระบบ (Admin) ไม่สามารถเข้าใช้งานได้';
+          errEl.textContent = 'เรียกตรวจสอบสิทธิ์ is_admin() ไม่สำเร็จ: ' + rpcErr.message;
+          errEl.classList.remove('hidden');
+          return;
+        }
+
+        if (isAdminRes !== true) {
+          await supabaseClient.auth.signOut();
+          setAdminAuthState(false);
+          errEl.textContent = 'บัญชีนี้ (' + authData.user.id + ') ยังไม่มีสิทธิ์ในตาราง public.admins';
           errEl.classList.remove('hidden');
           return;
         }
@@ -2972,10 +3235,37 @@
 
       // Panel 1: General & Tabs
       const ct = { ...DEFAULT_CUSTOM_TEXTS, ...(appState.customTexts || {}) };
+      const sp = { ...DEFAULT_SPLASH_SETTINGS, ...(appState.splashSettings || {}) };
       document.getElementById('admShopNameInput').value = appState.shopName;
       document.getElementById('admShopTaglineInput').value = ct.shopTagline;
       document.getElementById('admBillingUrlInput').value = appState.billingUrl;
       document.getElementById('admLogoPreview').src = appState.shopLogo;
+
+      // Populate Splash Screen Editor Form
+      const splashPreviewImg = document.getElementById('admSplashLogoPreview');
+      if (splashPreviewImg) splashPreviewImg.src = sp.logo || appState.shopLogo || FALLBACK_LOGO;
+      const splashWelcomeInp = document.getElementById('admSplashWelcomeInput');
+      if (splashWelcomeInp) splashWelcomeInp.value = sp.welcomeText || DEFAULT_SPLASH_SETTINGS.welcomeText;
+      const splashEnabledSel = document.getElementById('admSplashEnabledSelect');
+      if (splashEnabledSel) splashEnabledSel.value = sp.enabled === false ? 'false' : 'true';
+      const splashBgStartInp = document.getElementById('admSplashBgStartInput');
+      const splashBgStartHex = document.getElementById('admSplashBgStartHex');
+      if (splashBgStartInp) {
+        splashBgStartInp.value = sp.bgStart || DEFAULT_SPLASH_SETTINGS.bgStart;
+        if (splashBgStartHex) splashBgStartHex.textContent = splashBgStartInp.value.toUpperCase();
+        splashBgStartInp.oninput = () => {
+          if (splashBgStartHex) splashBgStartHex.textContent = splashBgStartInp.value.toUpperCase();
+        };
+      }
+      const splashBgEndInp = document.getElementById('admSplashBgEndInput');
+      const splashBgEndHex = document.getElementById('admSplashBgEndHex');
+      if (splashBgEndInp) {
+        splashBgEndInp.value = sp.bgEnd || DEFAULT_SPLASH_SETTINGS.bgEnd;
+        if (splashBgEndHex) splashBgEndHex.textContent = splashBgEndInp.value.toUpperCase();
+        splashBgEndInp.oninput = () => {
+          if (splashBgEndHex) splashBgEndHex.textContent = splashBgEndInp.value.toUpperCase();
+        };
+      }
 
       // Populate Custom Storefront Texts Form
       const setInputVal = (id, val) => {
@@ -3015,6 +3305,7 @@
             left.className = 'flex items-center gap-2.5 min-w-0';
             const img = document.createElement('img');
             img.src = bc.icon;
+            img.alt = bc.name;
             img.className = 'w-11 h-11 rounded-xl object-cover border border-pink-100 shrink-0';
             const meta = document.createElement('div');
             meta.className = 'min-w-0';
@@ -3032,10 +3323,12 @@
             const btns = document.createElement('div');
             btns.className = 'flex items-center gap-1 shrink-0';
             const editBtn = document.createElement('button');
+            editBtn.type = 'button';
             editBtn.className = 'w-7 h-7 rounded-full bg-blue-50 text-blue-500 text-xs';
             editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
             editBtn.onclick = () => openBillingChannelEditor(bc.id);
             const delBtn = document.createElement('button');
+            delBtn.type = 'button';
             delBtn.className = 'w-7 h-7 rounded-full bg-rose-50 text-rose-400 text-xs';
             delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
             delBtn.onclick = () => deleteBillingChannel(bc.id);
@@ -3058,12 +3351,14 @@
         const orderControls = document.createElement('div');
         orderControls.className = 'flex items-center gap-1.5 shrink-0';
         const upBtn = document.createElement('button');
+        upBtn.type = 'button';
         upBtn.className = 'w-7 h-7 rounded-lg bg-white border border-pink-100 text-xs disabled:opacity-30';
         upBtn.textContent = '▲';
         upBtn.disabled = index === 0;
         upBtn.onclick = () => moveHeaderTabOrder(index, -1);
 
         const downBtn = document.createElement('button');
+        downBtn.type = 'button';
         downBtn.className = 'w-7 h-7 rounded-lg bg-white border border-pink-100 text-xs disabled:opacity-30';
         downBtn.textContent = '▼';
         downBtn.disabled = index === appState.tabs.length - 1;
@@ -3105,10 +3400,14 @@
         inp2.className = 'flex-1 px-3 py-1.5 rounded-xl border border-pink-100 text-xs bg-white';
         inp2.onchange = () => updateTabMeta(tab.id, 'subtitle', inp2.value);
         const clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
         clearBtn.title = 'ลบคำโปรย';
         clearBtn.className = 'px-2.5 rounded-xl bg-rose-50 text-rose-400 text-xs hover:bg-rose-100';
         clearBtn.innerHTML = '<i class="fa-solid fa-eraser"></i>';
-        clearBtn.onclick = () => updateTabMeta(tab.id, 'subtitle', '');
+        clearBtn.onclick = () => {
+          inp2.value = '';
+          updateTabMeta(tab.id, 'subtitle', '');
+        };
         subRow.appendChild(inp2);
         subRow.appendChild(clearBtn);
         col2.appendChild(lbl2);
@@ -3136,6 +3435,7 @@
         left.className = 'flex items-center gap-3 min-w-0';
         const img = document.createElement('img');
         img.src = hl.cover;
+        img.alt = hl.title;
         img.className = 'w-12 h-12 rounded-full object-cover border border-pink-100 shrink-0';
         const info = document.createElement('div');
         info.className = 'min-w-0';
@@ -3153,10 +3453,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5 shrink-0';
         const editB = document.createElement('button');
+        editB.type = 'button';
         editB.className = 'w-8 h-8 rounded-full bg-blue-50 text-blue-500 text-xs';
         editB.innerHTML = '<i class="fa-solid fa-pen"></i>';
         editB.onclick = () => openHighlightEditor(hl.id);
         const delB = document.createElement('button');
+        delB.type = 'button';
         delB.className = 'w-8 h-8 rounded-full bg-rose-50 text-rose-400 text-xs';
         delB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         delB.onclick = () => deleteHighlight(hl.id);
@@ -3183,10 +3485,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1';
         const eB = document.createElement('button');
+        eB.type = 'button';
         eB.className = 'w-7 h-7 rounded-full bg-blue-50 text-blue-500 text-xs';
         eB.innerHTML = '<i class="fa-solid fa-pen"></i>';
         eB.onclick = () => openRuleEditor(rule.id);
         const dB = document.createElement('button');
+        dB.type = 'button';
         dB.className = 'w-7 h-7 rounded-full bg-rose-50 text-rose-400 text-xs';
         dB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         dB.onclick = () => deleteRule(rule.id);
@@ -3227,6 +3531,7 @@
         info.appendChild(p);
 
         const delB = document.createElement('button');
+        delB.type = 'button';
         delB.className = 'w-7 h-7 rounded-full bg-rose-50 text-rose-400 text-xs shrink-0';
         delB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         delB.onclick = () => deleteReview(rev.id);
@@ -3247,12 +3552,14 @@
         const left = document.createElement('div');
         left.className = 'flex items-center gap-2 flex-1 min-w-[200px]';
         const upB = document.createElement('button');
+        upB.type = 'button';
         upB.className = 'w-7 h-7 rounded-lg bg-pink-50 text-xs disabled:opacity-30';
         upB.textContent = '▲';
         upB.disabled = idx === 0;
         upB.onclick = () => moveRentCategory(idx, -1);
 
         const dnB = document.createElement('button');
+        dnB.type = 'button';
         dnB.className = 'w-7 h-7 rounded-lg bg-pink-50 text-xs disabled:opacity-30';
         dnB.textContent = '▼';
         dnB.disabled = idx === appState.rentCategories.length - 1;
@@ -3274,6 +3581,7 @@
         left.appendChild(countS);
 
         const delB = document.createElement('button');
+        delB.type = 'button';
         delB.className = 'px-3 py-1.5 rounded-full bg-rose-50 text-rose-500 text-xs font-semibold hover:bg-rose-100';
         delB.innerHTML = '<i class="fa-solid fa-trash mr-1"></i> ลบประเภท';
         delB.onclick = () => promptDeleteRentCategory(cat.id);
@@ -3294,6 +3602,7 @@
         top.className = 'flex items-center gap-3';
         const img = document.createElement('img');
         img.src = item.image;
+        img.alt = item.code;
         img.className = 'w-16 h-16 rounded-2xl object-cover border border-pink-100 shrink-0';
         const info = document.createElement('div');
         info.className = 'min-w-0 flex-1';
@@ -3323,6 +3632,7 @@
         const foot = document.createElement('div');
         foot.className = 'flex items-center justify-between border-t border-pink-50 pt-2';
         const stBtn = document.createElement('button');
+        stBtn.type = 'button';
         stBtn.className = `px-3 py-1 rounded-full text-xs font-bold ${item.status === 'available' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-500'}`;
         stBtn.textContent = `สถานะ: ${item.status === 'available' ? 'ว่าง (คลิกสลับ)' : 'ติดเช่า (คลิกสลับ)'}`;
         stBtn.onclick = () => toggleRentStatus(item.id);
@@ -3330,10 +3640,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5';
         const eB = document.createElement('button');
+        eB.type = 'button';
         eB.className = 'w-8 h-8 rounded-full bg-blue-50 text-blue-500 text-xs';
         eB.innerHTML = '<i class="fa-solid fa-pen"></i>';
         eB.onclick = () => openRentEditor(item.id);
         const dB = document.createElement('button');
+        dB.type = 'button';
         dB.className = 'w-8 h-8 rounded-full bg-rose-50 text-rose-400 text-xs';
         dB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         dB.onclick = () => deleteRentItem(item.id);
@@ -3358,6 +3670,7 @@
         top.className = 'flex items-center gap-3';
         const img = document.createElement('img');
         img.src = item.mainImage;
+        img.alt = item.code;
         img.className = 'w-16 h-16 rounded-2xl object-cover border border-pink-100 shrink-0';
         const info = document.createElement('div');
         info.className = 'min-w-0 flex-1';
@@ -3387,6 +3700,7 @@
         const foot = document.createElement('div');
         foot.className = 'flex items-center justify-between border-t border-pink-50 pt-2';
         const stBtn = document.createElement('button');
+        stBtn.type = 'button';
         stBtn.className = `px-3 py-1 rounded-full text-xs font-bold ${item.status === 'Sell' ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-600'}`;
         stBtn.textContent = `สถานะ: ${item.status} (คลิกสลับ)`;
         stBtn.onclick = () => toggleSellStatus(item.id);
@@ -3394,10 +3708,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5';
         const eB = document.createElement('button');
+        eB.type = 'button';
         eB.className = 'w-8 h-8 rounded-full bg-blue-50 text-blue-500 text-xs';
         eB.innerHTML = '<i class="fa-solid fa-pen"></i>';
         eB.onclick = () => openSellEditor(item.id);
         const dB = document.createElement('button');
+        dB.type = 'button';
         dB.className = 'w-8 h-8 rounded-full bg-rose-50 text-rose-400 text-xs';
         dB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         dB.onclick = () => deleteSellItem(item.id);
@@ -3422,6 +3738,7 @@
         left.className = 'flex items-center gap-3 min-w-0';
         const img = document.createElement('img');
         img.src = game.logo;
+        img.alt = game.name;
         img.className = 'w-14 h-14 rounded-full object-cover border border-pink-100 shrink-0';
         const info = document.createElement('div');
         info.className = 'min-w-0';
@@ -3439,10 +3756,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5 shrink-0';
         const eB = document.createElement('button');
+        eB.type = 'button';
         eB.className = 'px-3 py-1.5 rounded-full bg-blue-50 text-blue-500 text-xs font-semibold';
         eB.innerHTML = '<i class="fa-solid fa-pen mr-1"></i>แก้ไขเกม & เรท';
         eB.onclick = () => openTopupGameEditor(game.id);
         const dB = document.createElement('button');
+        dB.type = 'button';
         dB.className = 'w-8 h-8 rounded-full bg-rose-50 text-rose-400 text-xs';
         dB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         dB.onclick = () => deleteTopupGame(game.id);
@@ -3465,6 +3784,7 @@
         left.className = 'flex items-center gap-3 min-w-0';
         const img = document.createElement('img');
         img.src = ct.icon;
+        img.alt = ct.platform;
         img.className = 'w-12 h-12 rounded-2xl object-cover border border-pink-100 shrink-0';
         const info = document.createElement('div');
         info.className = 'min-w-0';
@@ -3486,10 +3806,12 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5 shrink-0';
         const eB = document.createElement('button');
+        eB.type = 'button';
         eB.className = 'w-8 h-8 rounded-full bg-blue-50 text-blue-500 text-xs';
         eB.innerHTML = '<i class="fa-solid fa-pen"></i>';
         eB.onclick = () => openContactEditor(ct.id);
         const dB = document.createElement('button');
+        dB.type = 'button';
         dB.className = 'w-8 h-8 rounded-full bg-rose-50 text-rose-400 text-xs';
         dB.innerHTML = '<i class="fa-solid fa-trash"></i>';
         dB.onclick = () => deleteContact(ct.id);
@@ -3533,11 +3855,13 @@
         const btns = document.createElement('div');
         btns.className = 'flex items-center gap-1.5';
         const prevB = document.createElement('button');
+        prevB.type = 'button';
         prevB.className = 'px-3 py-1.5 rounded-full bg-blue-50 text-blue-500 text-xs font-semibold';
         prevB.innerHTML = '<i class="fa-solid fa-play mr-1"></i>ฟังตัวอย่าง';
         prevB.onclick = () => previewSpecificTrack(trk.id);
 
         const actB = document.createElement('button');
+        actB.type = 'button';
         actB.className = `px-3 py-1.5 rounded-full ${isCurrent ? 'bg-emerald-400 text-white' : 'bg-white border border-pink-100 text-pink-500'} text-xs font-semibold`;
         actB.textContent = isCurrent ? '✓ เพลงหลักปัจจุบัน' : 'ตั้งเป็นเพลงหลัก';
         actB.onclick = () => setActiveBackgroundTrack(trk.id);
@@ -3547,6 +3871,7 @@
 
         if (trk.id !== 'trk_1') {
           const delB = document.createElement('button');
+          delB.type = 'button';
           delB.className = 'w-7 h-7 rounded-full bg-rose-50 text-rose-400 text-xs';
           delB.innerHTML = '<i class="fa-solid fa-trash"></i>';
           delB.onclick = () => deleteMusicTrack(trk.id);
@@ -3562,18 +3887,19 @@
     /* ==========================================================================
        16. SUPABASE CRUD HANDLERS FOR ADMIN
        ========================================================================== */
-    function buildTabsPayloadWithCustomTexts(tabsArr, customTextsObj) {
-      const cleanTabs = (tabsArr || []).filter(t => t && t.id !== '__custom_texts__');
+    function buildTabsPayloadWithCustomTexts(tabsArr, customTextsObj, splashSettingsObj) {
+      const cleanTabs = (tabsArr || []).filter(t => t && t.id !== '__custom_texts__' && t.id !== '__splash_settings__');
       return [
         ...cleanTabs,
-        { id: '__custom_texts__', texts: { ...DEFAULT_CUSTOM_TEXTS, ...(customTextsObj || {}) } }
+        { id: '__custom_texts__', texts: { ...DEFAULT_CUSTOM_TEXTS, ...(customTextsObj || {}) } },
+        { id: '__splash_settings__', splash: { ...DEFAULT_SPLASH_SETTINGS, ...(splashSettingsObj || {}) } }
       ];
     }
 
     async function upsertShopSettings(patchObj) {
       const mergedTabs = patchObj.tabs
-        ? buildTabsPayloadWithCustomTexts(patchObj.tabs, appState.customTexts)
-        : buildTabsPayloadWithCustomTexts(appState.tabs, appState.customTexts);
+        ? buildTabsPayloadWithCustomTexts(patchObj.tabs, appState.customTexts, appState.splashSettings)
+        : buildTabsPayloadWithCustomTexts(appState.tabs, appState.customTexts, appState.splashSettings);
 
       const payload = {
         id: 1,
@@ -3620,6 +3946,73 @@
           showToast('บันทึกชื่อร้าน ข้อความใต้ชื่อร้าน และลิงก์สำรองเรียบร้อยแล้ว ✨');
         }
       });
+    }
+
+    function saveSplashSettings() {
+      const btn = document.getElementById('btnSaveSplashSettings');
+      withSubmitLock('saveSplashSettings', btn, async () => {
+        const welcomeText = document.getElementById('admSplashWelcomeInput').value.trim() || DEFAULT_SPLASH_SETTINGS.welcomeText;
+        const enabled = document.getElementById('admSplashEnabledSelect').value !== 'false';
+        const bgStart = document.getElementById('admSplashBgStartInput').value || DEFAULT_SPLASH_SETTINGS.bgStart;
+        const bgEnd = document.getElementById('admSplashBgEndInput').value || DEFAULT_SPLASH_SETTINGS.bgEnd;
+
+        appState.splashSettings = {
+          ...DEFAULT_SPLASH_SETTINGS,
+          ...(appState.splashSettings || {}),
+          enabled,
+          welcomeText,
+          bgStart,
+          bgEnd
+        };
+
+        const ok = await upsertShopSettings({});
+        if (ok) {
+          applySplashSettingsToDOM();
+          renderAdminDashboard();
+          showToast('บันทึกการตั้งค่าหน้าโหลดต้อนรับเรียบร้อยแล้ว ✨');
+        }
+      });
+    }
+
+    function useMainLogoForSplash() {
+      const btn = document.getElementById('btnSaveSplashSettings');
+      withSubmitLock('useMainLogoSplash', btn, async () => {
+        appState.splashSettings = {
+          ...DEFAULT_SPLASH_SETTINGS,
+          ...(appState.splashSettings || {}),
+          logo: ''
+        };
+        const ok = await upsertShopSettings({});
+        if (ok) {
+          applySplashSettingsToDOM();
+          renderAdminDashboard();
+          showToast('ตั้งให้หน้าโหลดใช้โลโก้หลักของร้านเรียบร้อยแล้ว ✨');
+        }
+      });
+    }
+
+    function resetSplashSettingsToDefault() {
+      const btn = document.getElementById('btnResetSplashSettings');
+      withSubmitLock('resetSplashSettings', btn, async () => {
+        appState.splashSettings = { ...DEFAULT_SPLASH_SETTINGS };
+        const ok = await upsertShopSettings({});
+        if (ok) {
+          applySplashSettingsToDOM();
+          renderAdminDashboard();
+          showToast('คืนค่าหน้าโหลดต้อนรับเริ่มต้นเรียบร้อยแล้ว ✨');
+        }
+      });
+    }
+
+    function previewSplashScreenNow() {
+      appState.splashSettings = {
+        ...DEFAULT_SPLASH_SETTINGS,
+        ...(appState.splashSettings || {}),
+        welcomeText: document.getElementById('admSplashWelcomeInput').value.trim() || DEFAULT_SPLASH_SETTINGS.welcomeText,
+        bgStart: document.getElementById('admSplashBgStartInput').value || DEFAULT_SPLASH_SETTINGS.bgStart,
+        bgEnd: document.getElementById('admSplashBgEndInput').value || DEFAULT_SPLASH_SETTINGS.bgEnd
+      };
+      startInitialLoadingSplash(true);
     }
 
     function saveCustomTextsSettings() {
@@ -3698,6 +4091,7 @@
           appState.shopCover = FALLBACK_COVER;
           appState.coverHeight = '240px';
           appState.billingUrl = 'https://line.me';
+          appState.splashSettings = { ...DEFAULT_SPLASH_SETTINGS };
           appState.customTexts = { ...DEFAULT_CUSTOM_TEXTS };
           appState.tabs = defaultTabsCopy;
           appState.music.defaultVolume = 45;
@@ -3717,7 +4111,6 @@
           if (!ok) return;
 
           if (mode === 'full') {
-            // Clear existing rows across content tables safely
             const tablesToClear = [
               'billing_channels',
               'highlights',
@@ -3740,7 +4133,6 @@
               }
             }
 
-            // Remove custom music tracks except built-in trk_1
             await supabaseClient.from('music_tracks').delete().neq('id', 'trk_1');
             await supabaseClient.from('music_tracks').upsert({
               id: 'trk_1',
@@ -3750,7 +4142,6 @@
               sort_order: 0
             }, { onConflict: 'id' });
 
-            // Re-seed default starter data
             await supabaseClient.from('billing_channels').insert([
               {
                 name: 'LINE ร้าน',
@@ -4057,29 +4448,34 @@
       });
     }
 
-    async function updateTabMeta(tabId, field, value) {
+    function updateTabMeta(tabId, field, value) {
       const tab = appState.tabs.find(t => t.id === tabId);
       if (!tab) return;
       if (field === 'label' && !value.trim()) return;
       tab[field] = value;
-      const ok = await upsertShopSettings({ tabs: appState.tabs });
-      if (ok) {
-        renderNavigation();
-        showToast('อัปเดตข้อมูลส่วนหัวเรียบร้อย');
-      }
+
+      withSubmitLock('saveTabMeta_' + tabId, null, async () => {
+        const ok = await upsertShopSettings({ tabs: appState.tabs });
+        if (ok) {
+          renderNavigation();
+          showToast('อัปเดตข้อมูลส่วนหัวเรียบร้อย');
+        }
+      });
     }
 
-    async function moveHeaderTabOrder(index, dir) {
+    function moveHeaderTabOrder(index, dir) {
       const targetIdx = index + dir;
       if (targetIdx < 0 || targetIdx >= appState.tabs.length) return;
-      const temp = appState.tabs[index];
-      appState.tabs[index] = appState.tabs[targetIdx];
-      appState.tabs[targetIdx] = temp;
-      const ok = await upsertShopSettings({ tabs: appState.tabs });
-      if (ok) {
-        renderNavigation();
-        renderAdminDashboard();
-      }
+      withSubmitLock('moveHeaderTabOrder', null, async () => {
+        const temp = appState.tabs[index];
+        appState.tabs[index] = appState.tabs[targetIdx];
+        appState.tabs[targetIdx] = temp;
+        const ok = await upsertShopSettings({ tabs: appState.tabs });
+        if (ok) {
+          renderNavigation();
+          renderAdminDashboard();
+        }
+      });
     }
 
     async function updateCoverHeight(val) {
@@ -5332,35 +5728,48 @@
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const titleInput = document.getElementById('newTrackTitleFile');
-        const title = titleInput.value.trim() || file.name.replace(/\.[^/.]+$/, '');
-        const newId = 'trk_' + Date.now();
+      withSubmitLock('addTrackFile', null, () => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = async (e) => {
+            try {
+              const titleInput = document.getElementById('newTrackTitleFile');
+              const title = titleInput.value.trim() || file.name.replace(/\.[^/.]+$/, '');
+              const newId = 'trk_' + Date.now();
 
-        const { error } = await supabaseClient.from('music_tracks').insert({
-          id: newId,
-          title,
-          source_type: 'file',
-          url: e.target.result,
-          sort_order: appState.music.tracks.length
+              const { error } = await supabaseClient.from('music_tracks').insert({
+                id: newId,
+                title,
+                source_type: 'file',
+                url: e.target.result,
+                sort_order: appState.music.tracks.length
+              });
+
+              if (error) {
+                showToast('อัปโหลดไฟล์เพลงไม่สำเร็จ: ' + error.message, 'error');
+                resolve();
+                return;
+              }
+
+              await upsertShopSettings({ active_track_id: newId });
+              titleInput.value = '';
+              await refreshAllFromSupabase(true);
+              renderAdminDashboard();
+              userExplicitlyMuted = false;
+              const newTrack = getActiveTrack();
+              attemptPlayTrack(newTrack, false);
+              showToast(`อัปโหลดและตั้งเพลง "${title}" เรียบร้อยแล้ว 🎵`);
+            } finally {
+              resolve();
+            }
+          };
+          reader.onerror = () => {
+            showToast('ไม่สามารถอ่านไฟล์เสียงได้ กรุณาลองเลือกไฟล์ใหม่อีกครั้งค่ะ', 'error');
+            resolve();
+          };
+          reader.readAsDataURL(file);
         });
-
-        if (error) {
-          showToast('อัปโหลดไฟล์เพลงไม่สำเร็จ: ' + error.message, 'error');
-          return;
-        }
-
-        await upsertShopSettings({ active_track_id: newId });
-        titleInput.value = '';
-        await refreshAllFromSupabase(true);
-        renderAdminDashboard();
-        userExplicitlyMuted = false;
-        const newTrack = getActiveTrack();
-        attemptPlayTrack(newTrack, false);
-        showToast(`อัปโหลดและตั้งเพลง "${title}" เรียบร้อยแล้ว 🎵`);
-      };
-      reader.readAsDataURL(file);
+      });
     }
 
     async function deleteMusicTrack(id) {
@@ -5388,10 +5797,12 @@
        22. INITIALIZE APPLICATION ON WINDOW LOAD
        ========================================================================== */
     window.addEventListener('DOMContentLoaded', async () => {
+      startInitialLoadingSplash();
       renderNavigation();
       renderHomePage();
       await verifyAdminSessionAndPrivilege(true);
       await refreshAllFromSupabase(false);
+      markSplashDataReady();
       initMusicSystem();
     });
   </script>
